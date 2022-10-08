@@ -12,13 +12,13 @@ public class PlayerController : MonoBehaviour
     private Vector2 currentSwipe;
     private Vector3 nextCollisionPosition;
     private bool isMoving;
+
     private float defaultSpeed;
     public float speed = 7;
     public bool hasPowerup;
     public float slowSpeed = 5.0f;
     public float fastSpeed = 10.0f;
     public GameObject powerupIndicator;
-
 
 
 
@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     {
 
         MovePlayer();
+       
+
 
 
 
@@ -47,7 +49,6 @@ public class PlayerController : MonoBehaviour
 
         if (isMoving)
         {
-
 
             playerRb.velocity = moveDirection * speed;
 
@@ -103,6 +104,7 @@ public class PlayerController : MonoBehaviour
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direction, out hit, 100f))
+
         {
             nextCollisionPosition = hit.point;
         }
@@ -147,6 +149,16 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(PowerupCountdownRoutine());
             powerupIndicator.gameObject.SetActive(true);
             speed = fastSpeed;
+
+            nextCollisionPosition = hit.point;
+
         }
+
+        isMoving = true;
+        
+
+
+
+
     }
 }

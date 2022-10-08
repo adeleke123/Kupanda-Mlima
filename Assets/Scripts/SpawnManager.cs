@@ -9,10 +9,11 @@ public class SpawnManager : MonoBehaviour
     public GameObject thornPrefab;
 
     private float zSpawn = 5.0f;
-    // private float zThornSpawn = 0.3f;
-    // private float zPowerUpSpawn = 1f;
+
+    private float zThornSpawn = 4f;
     private float ySpawn = 50.0f;
-    private float xSpawnRange = 45.0f;
+    private float xSpawnRange = 42.0f;
+
 
     private float startDelay = 2.0f;
     private float thornSpawnRate = 5.0f;
@@ -36,7 +37,6 @@ public class SpawnManager : MonoBehaviour
         float spawnPosX = Random.Range(xSpawnRange, -xSpawnRange);
         float spawnPosY = Random.Range(20, 45);
 
-        Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, -zSpawn);
 
         Instantiate(thornPrefab, spawnPos, thornPrefab.transform.rotation);
     }
@@ -46,7 +46,7 @@ public class SpawnManager : MonoBehaviour
         float spawnPosX = Random.Range(xSpawnRange, -xSpawnRange);
         float spawnPosY = Random.Range(20, 45);
 
-        Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, -zSpawn);
+
 
         Instantiate(powerUpPrefab, spawnPos, powerUpPrefab.transform.rotation);
     }
