@@ -50,10 +50,10 @@ public class PlayerController : MonoBehaviour
 
 
         }
-        // Swiping 
+        // Swiping mechanism
         if (Input.GetMouseButton(0))
         {
-
+            //isMoving = true;
   
             swipePositionCurrentFrame = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 
