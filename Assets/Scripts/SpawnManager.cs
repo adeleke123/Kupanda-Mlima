@@ -8,9 +8,9 @@ public class SpawnManager : MonoBehaviour
     public GameObject powerUpPrefab;
     public GameObject thornPrefab;
 
-    private float zRockSpawn = 2.0f;
-    private float zThornSpawn = 0.3f;
-    private float zPowerUpSpawn = 1f;
+    private float zSpawn = 5.0f;
+    // private float zThornSpawn = 0.3f;
+    // private float zPowerUpSpawn = 1f;
     private float ySpawn = 50.0f;
     private float xSpawnRange = 45.0f;
 
@@ -36,7 +36,7 @@ public class SpawnManager : MonoBehaviour
         float spawnPosX = Random.Range(xSpawnRange, -xSpawnRange);
         float spawnPosY = Random.Range(20, 45);
 
-        Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, -zThornSpawn);
+        Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, -zSpawn);
 
         Instantiate(thornPrefab, spawnPos, thornPrefab.transform.rotation);
     }
@@ -46,7 +46,7 @@ public class SpawnManager : MonoBehaviour
         float spawnPosX = Random.Range(xSpawnRange, -xSpawnRange);
         float spawnPosY = Random.Range(20, 45);
 
-        Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, -zPowerUpSpawn);
+        Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, -zSpawn);
 
         Instantiate(powerUpPrefab, spawnPos, powerUpPrefab.transform.rotation);
     }
@@ -56,7 +56,7 @@ public class SpawnManager : MonoBehaviour
         int rockIndex = Random.Range(0, rockPrefabs.Length);
         float randomPosX = Random.Range(xSpawnRange, -xSpawnRange);
 
-        Vector3 randomPos = new Vector3(randomPosX, ySpawn, zRockSpawn);
+        Vector3 randomPos = new Vector3(randomPosX, ySpawn, -zSpawn);
 
         Instantiate(rockPrefabs[rockIndex], randomPos, rockPrefabs[rockIndex].transform.rotation);
     }

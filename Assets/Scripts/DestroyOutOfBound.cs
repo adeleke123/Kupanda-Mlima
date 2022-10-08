@@ -17,7 +17,6 @@ public class DestroyOutOfBound : MonoBehaviour
         if (transform.position.y < bottomLimit)
         {
             Destroy(gameObject);
-            Debug.Log("Rocks hits the ground");
         }
     }
 }
