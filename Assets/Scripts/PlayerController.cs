@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
         isMoving = true;
     }
 
+<<<<<<< HEAD
     IEnumerator PowerupCountdownRoutine()
     {
         yield return new WaitForSeconds(7);
@@ -121,6 +122,12 @@ public class PlayerController : MonoBehaviour
             powerupIndicator.gameObject.SetActive(true);
             speed = fastSpeed;
         }
+=======
+    //Add GameManager.gameOver and GameManager.levelCompleted = true in appropriate conditions
+    private void OnCollisionEnter(Collision collision)
+    {
+
+>>>>>>> 6a378e80fcba886beda115acd99590554b581239
     }
 }
 
