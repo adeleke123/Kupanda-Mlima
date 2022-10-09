@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9077002929909674442}
   m_Layer: 0
   m_Name: PowerUp
-  m_TagString: Untagged
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +93,6 @@ CapsuleCollider:
   m_GameObject: {fileID: 7558880937495178875}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
