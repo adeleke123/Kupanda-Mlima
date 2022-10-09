@@ -76,4 +76,9 @@ public class PlayerController : MonoBehaviour
         }
         isMoving = true;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
 }
