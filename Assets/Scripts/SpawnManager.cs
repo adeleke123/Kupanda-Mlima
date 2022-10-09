@@ -11,7 +11,7 @@ public class SpawnManager : MonoBehaviour
     private float zSpawn = 5.0f;
     private float zThornSpawn = 4f;
     private float ySpawn = 50.0f;
-    private float xSpawnRange = 42.0f;
+    private float xSpawnRange = 12.5f;
 
     private float startDelay = 2.0f;
     private float thornSpawnRate = 5.0f;
