@@ -13,11 +13,17 @@ public class PlayerController : MonoBehaviour
     private Vector3 nextCollisionPosition;
     private bool isMoving;
     public float speed = 5;
+    public bool hasPowerup;
+    public float slowSpeed = 5.0f;
+    public float fastSpeed = 10.0f;
+    public GameObject powerupIndicator;
+    private float defaultSpeed;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        defaultSpeed = speed;
     }
 
     // Update is called once per frame
@@ -77,8 +83,44 @@ public class PlayerController : MonoBehaviour
         isMoving = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    IEnumerator PowerupCountdownRoutine()
     {
-        
+        yield return new WaitForSeconds(7);
+        hasPowerup = false;
+        powerupIndicator.gameObject.SetActive(false);
+        speed = defaultSpeed;
+
+    }
+    IEnumerator ThornCountdownRoutine()
+    {
+        yield return new WaitForSeconds(7);
+        speed = defaultSpeed;
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        // if player collides with rocks, game over.
+        if (other.gameObject.CompareTag("Rock"))
+        {
+            Debug.Log("Game Over!");
+            Destroy(other.gameObject);
+        }
+
+        // if player collides with thorns, slow speed
+        else if (other.gameObject.CompareTag("Thorn"))
+        {
+            speed = slowSpeed;
+            Destroy(other.gameObject);
+            StartCoroutine(ThornCountdownRoutine());
+        }
+        //if player collides with powerup, increase speed
+        else if (other.gameObject.CompareTag("Powerup"))
+        {
+            hasPowerup = true;
+            Destroy(other.gameObject);
+            StartCoroutine(PowerupCountdownRoutine());
+            powerupIndicator.gameObject.SetActive(true);
+            speed = fastSpeed;
+        }
     }
 }
+
