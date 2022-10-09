@@ -77,8 +77,9 @@ public class PlayerController : MonoBehaviour
         isMoving = true;
     }
 
+    //Add GameManager.gameOver and GameManager.levelCompleted = true in appropriate conditions
     private void OnCollisionEnter(Collision collision)
     {
-        
+
     }
 }
