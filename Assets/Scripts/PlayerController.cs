@@ -150,11 +150,11 @@ public class PlayerController : MonoBehaviour
             powerupIndicator.gameObject.SetActive(true);
             speed = fastSpeed;
 
-            nextCollisionPosition = hit.point;
+           
 
         }
 
-        isMoving = true;
+       
         
 
 

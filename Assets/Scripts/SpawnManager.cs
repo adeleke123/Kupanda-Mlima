@@ -36,6 +36,7 @@ public class SpawnManager : MonoBehaviour
     {
         float spawnPosX = Random.Range(xSpawnRange, -xSpawnRange);
         float spawnPosY = Random.Range(20, 45);
+        Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, -zThornSpawn);
 
 
         Instantiate(thornPrefab, spawnPos, thornPrefab.transform.rotation);
@@ -45,6 +46,7 @@ public class SpawnManager : MonoBehaviour
     {
         float spawnPosX = Random.Range(xSpawnRange, -xSpawnRange);
         float spawnPosY = Random.Range(20, 45);
+        Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, -zThornSpawn);
 
 
 
