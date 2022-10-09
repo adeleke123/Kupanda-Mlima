@@ -10,12 +10,12 @@ public class SpawnManager : MonoBehaviour
 
     private float zSpawn = 5.0f;
     private float zThornSpawn = 4f;
-    private float ySpawn = 50.0f;
-    private float xSpawnRange = 12.5f;
+    private float ySpawn = 255.0f;
+    private float xSpawnRange = 20.0f;
 
     private float startDelay = 2.0f;
-    private float thornSpawnRate = 5.0f;
-    private float powerUpSpawnRate = 8.0f;
+    private float thornSpawnRate = 15.0f;
+    private float powerUpSpawnRate = 30.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +33,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnThorns()
     {
         float spawnPosX = Random.Range(xSpawnRange, -xSpawnRange);
-        float spawnPosY = Random.Range(20, 45);
+        float spawnPosY = Random.Range(50, 220);
 
         Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, -zThornSpawn);
 
@@ -43,7 +43,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnPowerUps()
     {
         float spawnPosX = Random.Range(xSpawnRange, -xSpawnRange);
-        float spawnPosY = Random.Range(20, 45);
+        float spawnPosY = Random.Range(30, 200);
 
         Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, -zThornSpawn);
 

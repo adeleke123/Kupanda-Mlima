@@ -14,9 +14,6 @@ public class PlayerController : MonoBehaviour
     private bool isMoving;
     public float speed = 5;
 
-    
-
-   
     // Start is called before the first frame update
     void Start()
     {
@@ -26,35 +23,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        
         MovePlayer();
-       
-
-
-
-
-}
-
-   
+    }
 
     void MovePlayer()
     {
-
         if (isMoving)
         {
-
-           
             playerRb.velocity = moveDirection * speed;
-
-
-
-
         }
+
         // Swiping 
         if (Input.GetMouseButton(0))
         {
-
-  
             swipePositionCurrentFrame = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 
             if (swipePositionLastFrame != Vector2.zero)
@@ -65,20 +46,15 @@ public class PlayerController : MonoBehaviour
 
                     return;
 
-
                 currentSwipe.Normalize();
-
-
 
                 if (currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
                 {
                     // Go left/right
 
                     SetDestination(currentSwipe.x > 0 ? Vector3.right : Vector3.left);
-
                 }
             }
-
             swipePositionLastFrame = swipePositionCurrentFrame;
         }
 
@@ -87,26 +63,17 @@ public class PlayerController : MonoBehaviour
             isMoving = false;
             swipePositionLastFrame = Vector2.zero;
             currentSwipe = Vector2.zero;
-
         }
-    
     }
 
     private void SetDestination(Vector3 direction)
     {
         moveDirection = direction;
-
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direction, out hit, 100f))
         {
             nextCollisionPosition = hit.point;
         }
-
         isMoving = true;
-        
-
-
-
-
     }
 }
