@@ -14,9 +14,16 @@ public class DestroyOutOfBound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y < bottomLimit)
+        
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        // if player collides with rocks, game over.
+        if (other.gameObject.CompareTag("Ground"))
         {
+
             Destroy(gameObject);
+
         }
     }
-}
+    }

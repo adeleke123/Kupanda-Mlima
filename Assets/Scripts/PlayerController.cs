@@ -13,11 +13,17 @@ public class PlayerController : MonoBehaviour
     private Vector3 nextCollisionPosition;
     private bool isMoving;
     public float speed = 5;
+    public bool hasPowerup;
+    public float slowSpeed = 5.0f;
+    public float fastSpeed = 10.0f;
+    public GameObject powerupIndicator;
+    private float defaultSpeed;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        defaultSpeed = speed;
     }
 
     // Update is called once per frame
@@ -25,14 +31,16 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
     }
-
-    void MovePlayer()
+    private void FixedUpdate()
     {
         if (isMoving)
         {
             playerRb.velocity = moveDirection * speed;
         }
+    }
 
+    void MovePlayer()
+    {
         // Swiping 
         if (Input.GetMouseButton(0))
         {
@@ -77,9 +85,55 @@ public class PlayerController : MonoBehaviour
         isMoving = true;
     }
 
-    //Add GameManager.gameOver and GameManager.levelCompleted = true in appropriate conditions
-    private void OnCollisionEnter(Collision collision)
+
+    IEnumerator PowerupCountdownRoutine()
     {
+        yield return new WaitForSeconds(7);
+        hasPowerup = false;
+        //powerupIndicator.gameObject.SetActive(false);
+        speed = defaultSpeed;
 
     }
+    IEnumerator ThornCountdownRoutine()
+    {
+        yield return new WaitForSeconds(7);
+        speed = defaultSpeed;
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        // if player collides with rocks, game over.
+        if (other.gameObject.CompareTag("Rock"))
+        {
+            Debug.Log("Game Over!");
+            Destroy(other.gameObject);
+            GameManager.gameOver = true;
+        }
+
+        // if player collides with thorns, slow speed, destroy thorn
+        else if (other.gameObject.CompareTag("Thorn"))
+        {
+            speed = slowSpeed;
+            Destroy(other.gameObject);
+            Debug.Log("Ouch a thorn");
+            StartCoroutine(ThornCountdownRoutine());
+        }
+        //if player collides with powerup, increase speed
+        else if (other.gameObject.CompareTag("Powerup"))
+        {
+            hasPowerup = true;
+            Destroy(other.gameObject);
+            Debug.Log("Powerup");
+            StartCoroutine(PowerupCountdownRoutine());
+            //powerupIndicator.gameObject.SetActive(true);
+            speed = fastSpeed;
+        }
+        else if (other.gameObject.CompareTag("Peak"))
+        {
+            Debug.Log("Level Complete");
+            GameManager.levelCompleted = true;
+        }
+
+        //Add GameManager.gameOver and GameManager.levelCompleted = true in appropriate conditions
+    }
 }
+
