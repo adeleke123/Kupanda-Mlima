@@ -31,14 +31,16 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
     }
-
-    void MovePlayer()
+    private void FixedUpdate()
     {
         if (isMoving)
         {
             playerRb.velocity = moveDirection * speed;
         }
+    }
 
+    void MovePlayer()
+    {
         // Swiping 
         if (Input.GetMouseButton(0))
         {
@@ -83,12 +85,12 @@ public class PlayerController : MonoBehaviour
         isMoving = true;
     }
 
-<<<<<<< HEAD
+
     IEnumerator PowerupCountdownRoutine()
     {
         yield return new WaitForSeconds(7);
         hasPowerup = false;
-        powerupIndicator.gameObject.SetActive(false);
+        //powerupIndicator.gameObject.SetActive(false);
         speed = defaultSpeed;
 
     }
@@ -104,13 +106,15 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Game Over!");
             Destroy(other.gameObject);
+            GameManager.gameOver = true;
         }
 
-        // if player collides with thorns, slow speed
+        // if player collides with thorns, slow speed, destroy thorn
         else if (other.gameObject.CompareTag("Thorn"))
         {
             speed = slowSpeed;
             Destroy(other.gameObject);
+            Debug.Log("Ouch a thorn");
             StartCoroutine(ThornCountdownRoutine());
         }
         //if player collides with powerup, increase speed
@@ -118,16 +122,18 @@ public class PlayerController : MonoBehaviour
         {
             hasPowerup = true;
             Destroy(other.gameObject);
+            Debug.Log("Powerup");
             StartCoroutine(PowerupCountdownRoutine());
-            powerupIndicator.gameObject.SetActive(true);
+            //powerupIndicator.gameObject.SetActive(true);
             speed = fastSpeed;
         }
-=======
-    //Add GameManager.gameOver and GameManager.levelCompleted = true in appropriate conditions
-    private void OnCollisionEnter(Collision collision)
-    {
+        else if (other.gameObject.CompareTag("Peak"))
+        {
+            Debug.Log("Level Complete");
+            GameManager.levelCompleted = true;
+        }
 
->>>>>>> 6a378e80fcba886beda115acd99590554b581239
+        //Add GameManager.gameOver and GameManager.levelCompleted = true in appropriate conditions
     }
 }
 
