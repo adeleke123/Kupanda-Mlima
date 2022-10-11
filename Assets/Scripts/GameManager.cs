@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
         {
             timerText.gameObject.SetActive(true);
             timerText.text = "Time: " + Mathf.FloorToInt(gameTime % 60);
-
         }
 
         if (gameOver)

@@ -144,8 +144,6 @@ public class PlayerController : MonoBehaviour
             //playerAudio.PlayOneShot(thornSound, 1.0f);
 
         }
-
-        //Add GameManager.gameOver and GameManager.levelCompleted = true in appropriate conditions
     }
 }
 
