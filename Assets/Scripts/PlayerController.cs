@@ -36,14 +36,6 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
         dirtParticle.Play();
-        if(transform.position.x < -22)
-        {
-            transform.position = new Vector3(-22, transform.position.y, transform.position.z);
-        }
-        else if(transform.position.x > 22)
-        {
-            transform.position = new Vector3(22, transform.position.y, transform.position.z);
-        }
     }
     private void FixedUpdate()
     {
