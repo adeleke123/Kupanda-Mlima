@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public static bool gameOver;
     public static bool levelCompleted;
+    public static bool isGameStarted;
+
     public GameObject gameOverPanel;
     public GameObject levelCompletedPanel;
     public GameObject gameStartPanel;
@@ -25,7 +27,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         gameTime = 60;
         timerText.text = "Time: " + gameTime;
-        gameOver = levelCompleted = gameiIsPaused = false;
+        isGameStarted = gameOver = levelCompleted = gameiIsPaused = false;
     }
 
     // Update is called once per frame
@@ -54,8 +56,15 @@ public class GameManager : MonoBehaviour
             levelCompletedPanel.SetActive(true);
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        // if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !isGameStarted)
+        // {
+        //     if (EventSystem.current.IsPointerOverGameObject (Input.GetTouch(0).fingerId))
+        //         return;
+        if(Input.GetMouseButtonDown(0) && !isGameStarted)
         {
+            if(EventSystem.current.IsPointerOverGameObject())
+
+            isGameStarted = true;
             gameStartPanel.SetActive(false);
             gamePlayPanel.SetActive(true);
         }
