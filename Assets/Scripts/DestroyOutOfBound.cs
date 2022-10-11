@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class DestroyOutOfBound : MonoBehaviour
 {
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 31421fc3bbf41bb6fa01817d718ef893a689765f
     // Start is called before the first frame update
     void Start()
     {

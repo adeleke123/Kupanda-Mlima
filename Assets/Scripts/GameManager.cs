@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
-        gameTime = 100;
+        gameTime = 60;
         timerText.text = "Time: " + gameTime;
         gameOver = levelCompleted = gameiIsPaused = false;
     }

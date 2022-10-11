@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 swipePositionCurrentFrame;
     private Vector2 currentSwipe;
     private Vector3 nextCollisionPosition;
+    public AudioClip thornSound;
+    public AudioClip powerupSound;
+    public AudioClip rockCrash;
+    private AudioSource playerAudio;
     private bool isMoving;
     public float speed = 5;
     public bool hasPowerup;
@@ -18,18 +22,28 @@ public class PlayerController : MonoBehaviour
     public float fastSpeed = 10.0f;
     public GameObject powerupIndicator;
     private float defaultSpeed;
-
+    public ParticleSystem dirtParticle;
 
     // Start is called before the first frame update
     void Start()
     {
         defaultSpeed = speed;
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     private void Update()
     {
         MovePlayer();
+        dirtParticle.Play();
+        if(transform.position.x < -22)
+        {
+            transform.position = new Vector3(-22, transform.position.y, transform.position.z);
+        }
+        else if(transform.position.x > 22)
+        {
+            transform.position = new Vector3(22, transform.position.y, transform.position.z);
+        }
     }
     private void FixedUpdate()
     {
@@ -77,6 +91,7 @@ public class PlayerController : MonoBehaviour
     private void SetDestination(Vector3 direction)
     {
         moveDirection = direction;
+        moveDirection.y = 1;
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direction, out hit, 100f))
         {
@@ -106,6 +121,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Game Over!");
             Destroy(other.gameObject);
+            playerAudio.PlayOneShot(rockCrash, 1.0f);
             GameManager.gameOver = true;
         }
 
@@ -115,6 +131,7 @@ public class PlayerController : MonoBehaviour
             speed = slowSpeed;
             Destroy(other.gameObject);
             Debug.Log("Ouch a thorn");
+            playerAudio.PlayOneShot(thornSound, 1.0f);
             StartCoroutine(ThornCountdownRoutine());
         }
         //if player collides with powerup, increase speed
@@ -123,6 +140,7 @@ public class PlayerController : MonoBehaviour
             hasPowerup = true;
             Destroy(other.gameObject);
             Debug.Log("Powerup");
+            playerAudio.PlayOneShot(powerupSound, 1.0f);
             StartCoroutine(PowerupCountdownRoutine());
             //powerupIndicator.gameObject.SetActive(true);
             speed = fastSpeed;
@@ -131,6 +149,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Level Complete");
             GameManager.levelCompleted = true;
+            //playerAudio.PlayOneShot(thornSound, 1.0f);
+
         }
 
         //Add GameManager.gameOver and GameManager.levelCompleted = true in appropriate conditions
